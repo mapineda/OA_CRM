@@ -32,9 +32,31 @@ The Process in a nutshell:
 
 ### Step 1. Create loopback server app with Yeoman.
 
+*Make sure you have npm and nodeJS installed*
+
+Install loopback via strongloop:
 ```
 npm install -g strongloop
 ```
+Install Yeoman using npm:
+```
+npm install -g yo
+```
+Install Yeoman loopback generator:
+```
+npm install -g generator-loopback
+```
+Run the Yeoman scaffolding tool for generating the app:
+```
+yo loopback
+```
+
+*Test your app by starting the app*
+```
+node server/server.js
+```
+
+
 
 
 ## FAQs
