@@ -24,7 +24,7 @@ The Process in a nutshell:
 ## Getting Started
 
 1. Create loopback server with Yeoman
-2. Create Aurelia SPA
+2. Create Aurelia Single Page Application (SPA)
 3. Merge Client with Server
 4. Customize gulp web server processing
 5. Add Member model in the loopback server app
@@ -56,7 +56,30 @@ yo loopback
 node server/server.js
 ```
 
+### Step 2. Create the Aurelia SPA
+*Caution!*
+We will use yeoman again for setting up the SPA's base structure, however it's important that we do this in a folder completely separate from the previous step.
 
+Ultimately, we will move the Aurelia spa in the client folder of the loopback app, however we can not generate the application in this folder.
+
+*Note: make sure the following has been installed for this step; yeoman Aurelia generator, gulp and jspm*
+
+```
+ mkdir new-folder
+```
+cd into new-folder, make sure you have the yeoman aurelia generator installed and run:
+```
+yo aurelia
+```
+*Test the app by running:*
+
+```
+gulp watch
+```
+*navigate to localhost://9000 to view your app*
+
+### Step 3. Merge Client with Server
+Copy the doc folder from your aureilia-app to the client folder in loopback app
 
 
 ## FAQs
