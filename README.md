@@ -1,13 +1,13 @@
-## OA_CMS
+# OA_CMS
 OA_CMS is a CMS tool developed for Open-Austin
 
 ## FAQs
 
-What is Open-Austin?
+### What is Open-Austin?
 
-What is a CMS?
+### What is a CMS?
 
-How can I help?
+### How can I help?
 
 ## Contact
 
