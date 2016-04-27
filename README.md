@@ -32,9 +32,9 @@ The Process in a nutshell:
 
 ### Step 1. Create loopback server app with Yeoman.
 
-'''
+```
 npm install -g strongloop
-'''
+```
 
 
 ## FAQs
