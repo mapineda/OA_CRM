@@ -12,5 +12,9 @@
       "../common/mixins",
       "./mixins"
     ]
+  },
+  "member": {
+    "dataSource": null,
+    "public": false
   }
 }
