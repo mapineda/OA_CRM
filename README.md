@@ -51,6 +51,11 @@ Run the Yeoman scaffolding tool for generating the app:
 yo loopback
 ```
 
+*Test your app by starting the app*
+```
+node server/server.js
+```
+
 
 
 
