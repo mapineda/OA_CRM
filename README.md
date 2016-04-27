@@ -126,7 +126,25 @@ Update path.js file with following variables:
 nodeJsPort:3000
 webServerPort : 4000
 ```
+### Step 5: Add Member model in the loopback server app
+From the server folder:
+```
+yo loopback:model
+```
+Follow the prompted steps. Make sure to create a model called 'member' with the fields firstName and lastName (case sensitive). When asked for a plural name for member, make sure to type members.
 
+
+Next, locate in the server project the file dataSource.json - we will change this file so that our memory data is stored in a file. Change to:
+```
+{
+  "db": {
+    "name": "db",
+    "connector": "memory",
+    "file":"mydata.json"
+  }
+}
+```
+All data will now be saved in the file mydata.json
 
 ## FAQs
 
