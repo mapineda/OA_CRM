@@ -79,7 +79,53 @@ gulp watch
 *navigate to localhost://9000 to view your app*
 
 ### Step 3. Merge Client with Server
-Copy the doc folder from your aureilia-app to the client folder in loopback app
+Copy the doc folder from your aureilia-app to the client folder in loopback app.
+
+### Step 4. Customize gulp web server processing
+Here we make sure that the web server is serving all static files, and requests to https://localost/4000/Api/xyz are proxied to the NodeJs application.
+
+1. Navigate to aurelia-app/build/tasks/serve.js
+2. Insert code:
+```
+var gulp = require('gulp');  
+var browserSync = require('browser-sync');  
+var proxy = require('proxy-middleware');  
+var url = require('url');  
+var paths = require('../paths');  
+gulp.task('serve', ['build' ], function(done) {
+
+  var proxyOptionsAccessControl = function(req,res, next){
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+  };
+  var proxyOptionsApiRoute = url.parse('http://localhost:' + paths.nodeJsPort +  '/api') ;
+  proxyOptionsApiRoute.route = '/api';
+
+  var proxyOptionsAuthRoute = url.parse('http://localhost:' + paths.nodeJsPort +  '/auth') ;
+  proxyOptionsAuthRoute.route = '/auth';
+
+  browserSync({
+    open: false,
+    port: paths.webServerPort,
+    server: {
+      baseDir: ['.'],
+      middleware: [
+        proxyOptionsAccessControl,
+        proxy(proxyOptionsApiRoute),
+        proxy(proxyOptionsAuthRoute)]
+    }
+  }, done);
+});
+```
+*install npm module for proxy middleware from the client folder as a dev dependency*
+```
+npm install --save-dev proxy-middleware
+```
+Update path.js file with following variables:
+```
+nodeJsPort:3000
+webServerPort : 4000
+```
 
 
 ## FAQs
