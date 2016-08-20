@@ -1,0 +1,18 @@
+<div class="page-header">
+	<h3>Accounts</h3>
+</div>
+<ol class="breadcrumb">
+  <li><a href="#/dashboard">Dashboard</a></li>
+  <li class="active">Accounts</li>
+</ol>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<tbody>
+			<tr ng-repeat="account in accounts | orderBy:'name'">
+				<td>
+					<span class="alert alert-warning">{{account.category}}</span> - <a href="#">{{account.name}}</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

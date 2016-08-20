@@ -1,0 +1,125 @@
+<div class="page-header">
+	<h3>Contacts</h3>
+</div>
+<ol class="breadcrumb">
+  <li><a href="#/dashboard">Dashboard</a></li>
+  <li class="active">Contacts</li>
+</ol>
+<div ng-show="error" class="alert alert-danger row">
+	<span>{{error.message}}</span>
+</div>
+<div class="row" style="margin-bottom: 30px;" ng-hide="editContact">
+	<div class="col-sm-8">
+		<form class="form-inline" ng-hide="createContact">
+			<div class="form-group">
+				<label for="search">Search: </label>
+				<input id="search" type="text" class="form-control" ng-model="search" ng-change="searchFunction()" placeholder="Search for contact..." />
+			</div>
+		</form>
+	</div>
+	<div class="col-sm-2 col-sm-offset-2">
+		<a href="" ng-click="setShowContact()">Create Contact <span ng-hide="showContact" class="glyphicon glyphicon-arrow-down"></span><span ng-show="showContact" class="glyphicon glyphicon-arrow-up"></span></a>
+	</div>
+</div>
+
+<form class="form-inline" ng-show="showContact" style="margin-top:30px; margin-bottom: 30px;">
+	<div class="form-group">
+		<label for="firstName">First Name: </label>
+		<input id="firstName" type="text" class="form-control" ng-model="contact.first" placeholder="First Name" />
+	</div>
+	<div class="form-group">
+		<label for="lastName">Last Name: </label>
+		<input id="lastName" type="text" class="form-control" ng-model="contact.last" placeholder="Last Name" />
+	</div>
+	<div class="form-group">
+		<label for="email">E-mail: </label>
+		<input id="email" type="text" class="form-control" ng-model="contact.email" placeholder="E-mail" />
+	</div>
+	<div class="form-group">
+		<label for="phone">Phone: </label>
+		<input id="phone" type="text" class="form-control" ng-model="contact.phone" placeholder="Phone" />
+	</div>
+	<div class="form-group">
+		<label for="account">Account: </label>
+	  	<select class="form-control" id="account" ng-model="contact.account" ng-options="f.name for f in accounts | orderBy:'f.name'"></select>
+	</div>
+	<div class="form-group">
+		<label for="assignedTo">Assigned to: </label>
+	  	<select class="form-control" id="assignedTo" ng-model="contact.assignedTo" ng-options="f.last+', '+f.first for f in users | orderBy:'f.last'"></select>
+	</div>
+	<div class="form-group">
+		<label for="title">Title: </label>
+		<input id="title" type="text" class="form-control" ng-model="contact.title" placeholder="Title" />
+	</div>
+	<div class="form-group">
+		<label for="department">Department: </label>
+		<input id="department" type="text" class="form-control" ng-model="contact.department" placeholder="Department" />
+	</div>
+	<div class="form-group">
+		<label for="altEmail">Alternate e-mail: </label>
+		<input id="altEmail" type="text" class="form-control" ng-model="contact.altEmail" placeholder="Alternate e-mail" />
+	</div>
+	<div class="form-group">
+		<label for="mobile">Mobile: </label>
+		<input id="mobile" type="text" class="form-control" ng-model="contact.mobile" placeholder="Mobile" />
+	</div>
+	<div class="form-group">
+		<label for="fax">Fax: </label>
+		<input id="fax" type="text" class="form-control" ng-model="contact.fax" placeholder="Fax" />
+	</div>
+	<div class="form-group">
+		<label for="street1">Street 1: </label>
+		<input id="street1" type="text" class="form-control" ng-model="contact.street1" placeholder="Street 1" />
+	</div>
+	<div class="form-group">
+		<label for="street2">Street 2: </label>
+		<input id="street2" type="text" class="form-control" ng-model="contact.street2" placeholder="Street 2" />
+	</div>
+	<div class="form-group">
+		<label for="city">City: </label>
+		<input id="city" type="text" class="form-control" ng-model="contact.city" placeholder="City" />
+	</div>
+	<div class="form-group">
+		<label for="state">State: </label>
+		<input id="state" type="text" class="form-control" ng-model="contact.state" placeholder="State" />
+	</div>
+	<div class="form-group">
+		<label for="zip">Zip: </label>
+		<input id="zip" type="text" class="form-control" ng-model="contact.zip" placeholder="Zip" />
+	</div>
+	<div class="form-group">
+		<label for="permissions">Permissions: </label>
+	  	<select class="form-control" id="permissions" ng-model="contact.access" ng-options="f for f in permissions"></select>
+	</div>
+	<button type="submit" class="btn btn-primary" ng-click="createContactFunction()" ng-hide="editContact">Create Contact</button><button type="submit" class="btn btn-primary" ng-click="updateContact()" ng-hide="createContact">Update Contact</button> or <a href="" ng-click="cancelContactCreate()">Cancel</a>
+</form>
+<div class="table-responsive">
+
+	<table class="table table-striped" ng-show="anyContacts()">
+		<tbody>
+			<tr ng-repeat="contact in contacts | orderBy:'last' | filter:search:strict">
+				<td>
+					<a href="#/main/singleContact/{{contact._id}}">{{contact.first}} {{contact.last}}</a>, {{contact.title}} at <a href="#">{{contact.account.name}}</a>
+				</td>
+				<td align="right">
+					<button class="btn btn-warning" ng-click="showEditContact(contact)"><span class="glyphicon glyphicon-pencil"></span></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-danger" ng-click="deleteContact(contact)"><span class="glyphicon glyphicon-trash"></span></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<span ng-hide="anyContacts()">There a no contacts to display.</span>
+</div>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation" ng-show="anyContacts()">
+  	<ul uib-pagination total-items="totalItems" max-size="5" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="getAll()"></ul>
+	<form>
+		<div class="input-group">
+			<label for="itemsPerPage">Contacts per page: </label>
+	  		<select id="itemsPerPage" ng-model="itemsPerPage" ng-change="getAll2()" ng-options="f for f in itemSelector">
+	  		</select>
+		</div>
+	</form>
+</nav>
+<!-- Pagination -->

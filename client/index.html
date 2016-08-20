@@ -1,0 +1,118 @@
+<!Doctype html>
+<html ng-app="deltaCRM">
+	<head>
+		<title></title>
+		<link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="components/angular-tablesort/tablesort.css" rel="stylesheet" />
+		<link href="components/angular-xeditable/dist/css/xeditable.min.css" rel="stylesheet" />
+		<link href="assets/css/style.css" rel="stylesheet" />
+	</head>
+	<body>
+	<!-- Navbar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top margin-bottom-0" ng-controller="navCtrl">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/dashboard">Delta Electrical CRM</a>
+			</div>
+			<div uib-collapse="isCollapsed" class="navbar-collapse">
+
+				<ul class="nav navbar-nav" ng-show="isLoggedIn()">
+					<li class="dropdown" uib-dropdown>
+						<a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button">Main Menu <span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li ng-repeat="item in mainMenuItems | orderBy:'pageName'">
+								<a href="{{item.link}}" ng-click="collapse()">{{item.pageName}}</a>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown" uib-dropdown ng-show="isAdmin()">
+						<a href="#" class="dropdown-toggle" uib-dropdown-toggle role="button">Admin Menu <span class="caret"></span></a>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li ng-repeat="item in adminMenuItems | orderBy:'pageName'">
+								<a href="{{item.link}}" ng-click="collapse()">{{item.pageName}}</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+	  				<li ng-show="isLoggedIn()">
+	  					<a>Welcome...{{currentUser().username}}</a>
+	  				</li>
+	  				<li ng-show="isLoggedIn()">
+	  					<a href="" ng-click="logOut()">Log Out</a>
+	  				</li>
+	  				<li ng-hide="isLoggedIn()">
+	  					<a href="/#/login">Log In</a>
+	  				</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- Navbar -->
+		<div class="container">
+			<ui-view></ui-view>
+		</div>
+
+		<!-- Main Javascript Includes -->
+			<script src="components/angular/angular.min.js"></script>
+			<script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+			<script src="components/angular-animate/angular-animate.min.js"></script>
+			<script src="components/angular-touch/angular-touch.min.js"></script>
+			<script src="components/angular-bootstrap/ui-bootstrap.min.js"></script>
+			<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+			<script src="components/angular-tablesort/js/angular-tablesort.js"></script>
+			<script src="components/angular-xeditable/dist/js/xeditable.min.js"></script>
+		<!-- Main Javascript Includes -->
+		<!-- App -->
+			<!-- Modules -->
+				<script src="app/app.module.js"></script>
+			<!-- Modules -->
+			<!-- Components -->
+				<!-- Auth -->
+					<script src="app/components/login/loginService.js"></script>
+					<script src="app/components/login/loginController.js"></script>
+					<script src="app/components/login/loginRoutes.js"></script>
+				<!-- Auth -->
+				<!-- Nav -->
+					<script src="app/components/nav/navController.js"></script>
+				<!-- Nav -->
+				<!-- Dashboard -->
+					<script src="app/components/dashboard/dashboardService.js"></script>
+					<script src="app/components/dashboard/dashboardController.js"></script>
+					<script src="app/components/dashboard/dashboardRoutes.js"></script>
+				<!-- Dashboard -->
+				<!-- Admin -->
+					<!-- Users -->
+						<script src="app/components/admin/users/usersService.js"></script>
+						<script src="app/components/admin/users/usersController.js"></script>
+						<script src="app/components/admin/users/usersRoutes.js"></script>
+					<!-- Users -->
+					<!-- Groups -->
+					<!-- Groups -->
+				<!-- Admin -->
+				<!-- Main -->
+					<!-- Accounts -->
+						<script src="app/components/main/accounts/accountsService.js"></script>
+						<script src="app/components/main/accounts/accountsController.js"></script>
+						<script src="app/components/main/accounts/accountsRoutes.js"></script>
+					<!-- Accounts -->
+					<!-- Contacts -->
+						<script src="app/components/main/contacts/contactsService.js"></script>
+						<script src="app/components/main/contacts/contactsController.js"></script>
+						<script src="app/components/main/contacts/contactsRoutes.js"></script>
+					<!-- Contacts -->
+					<!-- singleContact-->
+						<script src="app/components/main/singleContact/singleContactController.js"></script>
+						<script src="app/components/main/singleContact/singleContactRoutes.js"></script>
+					<!-- singleContact -->
+				<!-- Main -->
+			<!-- Components -->
+		<!-- App -->
+	</body>
+</html>

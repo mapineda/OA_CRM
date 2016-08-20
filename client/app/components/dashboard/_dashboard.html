@@ -1,0 +1,26 @@
+<div class="page-header">
+	<h3>Dashboard</h3>
+</div>
+<ol class="breadcrumb">
+	<li class="active">Dashboard</li>
+</ol>
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-8">
+		<uib-accordion close-others="oneAtATime">
+			<div uib-accordion-group class="panel-default" is-open="status.activityOpen">
+      			<uib-accordion-heading>
+        			<strong>Recent Activity</strong> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': activityOpen, 'glyphicon-chevron-right': !activityOpen}"></i>
+      			</uib-accordion-heading>
+      			<ul>
+      				<li ng-repeat="activity in status.history | orderBy:'-timestamp' | limitTo:myRecentActivityLimit:myRecentActivityStart">{{activity.userId.first}} {{activity.userId.last}} {{activity.message}} on {{activity.timestamp | date}} @ {{activity.timestamp | date: "h:mm:ss a"}}</li>
+      			</ul>
+            <!--Recent Activity Pagination -->
+	            <nav aria-label="Page navigation">
+	                <ul uib-pagination total-items="status.history.length" max-size="5" boundary-link-numbers="true" rotate="false" items-per-page="myRecentActivityLimit" ng-model="status.recentActivityCurrentPage" ng-change="paginateRecentActivity()"></ul>
+	            </nav>
+            <!--Recent Activity Pagination -->
+    		</div>
+		</uib-accordion>
+	</div>
+</div>
