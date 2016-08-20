@@ -146,6 +146,9 @@ Next, locate in the server project the file dataSource.json - we will change thi
 ```
 All data will now be saved in the file mydata.json
 
+### Step 6. Add basic CRUD in Aurelia SPA
+
+
 ## FAQs
 
 ### What is Open-Austin?

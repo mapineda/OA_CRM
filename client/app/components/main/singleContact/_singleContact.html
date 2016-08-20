@@ -1,0 +1,76 @@
+<div class="page-header">
+	<h3>{{myContact.first}} {{myContact.last}}</h3>
+</div>
+<ol class="breadcrumb">
+  <li><a href="/#/dashboard">Dashboard</a></li>
+  <li><a href="/#/main/contacts">Contacts</a></li>
+  <li class="active">{{myContact.first}} {{myContact.last}}</li>
+</ol>
+<div class="row">
+	<div class="col-sm-4">
+    <div class="jumbotron alert-info">
+  		<h4>{{myContact.first}} {{myContact.last}}</h4>
+  		{{myContact.title}} at {{myContact.account.name}}<br /><br />
+  		<address>
+    			<strong>{{myContact.account.name}}</strong><br />
+    			<span ng-show="myContact.street1">{{myContact.street1}}<br /></span>
+    			<span ng-show="myContact.street2">{{myContact.street2}}<br /></span>
+    			<span ng-show="myContact.city">{{myContact.city}}, </span><span ng-show="myContact.state">{{myContact.state}} </span><span ng-show="myContact.zip">{{myContact.zip}}<br /></span>
+    			<span ng-show="myContact.phone"><abbr title="Phone">Phone:</abbr> {{myContact.phone}}<br /></span>
+    			<span ng-show="myContact.mobile"><abbr title="Mobile">Mobile:</abbr> {{myContact.mobile}}<br /></span>
+    			<span ng-show="myContact.fax"><abbr title="Fax">Fax:</abbr> {{myContact.fax}}<br /></span><br />
+
+    			<span ng-show="myContact.email"><abbr title="Email">E-mail:</abbr> {{myContact.email}}<br /></span>
+    			<span ng-show="myContact.altEmail"><abbr title="Alternate E-mail">Alternate E-mail:</abbr> {{myContact.altEmail}}<br /></span>
+
+  		</address>
+  		<h4>Contact Summary</h4>
+  		<strong>Assigned to:</strong> {{myContact.assignedTo.first}} {{myContact.assignedTo.last}}
+    </div>
+	</div>
+	<div class="col-sm-8">
+		<uib-accordion close-others="oneAtATime">
+			<div uib-accordion-group class="panel-default" is-open="status.NotesOpen">
+      			<uib-accordion-heading>
+        			<strong>Notes</strong> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.NotesOpen, 'glyphicon-chevron-right': !status.NotesOpen}"></i>
+      			</uib-accordion-heading>
+            <div class="page-header">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="note">Note: </label>
+                  <input type="text" class="form-control" ng-model="text" placeholder="Add a new note..." />
+                  <button type="submit" class="btn btn-primary" ng-click="addNote(text)">Add</button>
+                </div>
+              </form>
+            </div>
+      			<ul ng-show="status.totalItems > 0">
+              <li ng-repeat="note in myContact.notes | orderBy:'-added' | limitTo:myLimit:myStart">{{note.text}} - <span class="label label-default">added by {{note.username}} on {{note.added | date}} @ {{note.added | date: "h:mm:ss a" }}</span></li>
+            </ul>
+            <span ng-hide="status.totalItems > 0">There are no notes to display</span>
+            <!--Notes Pagination -->
+            <nav aria-label="Page navigation">
+                <ul uib-pagination total-items="status.totalItems" max-size="5" boundary-link-numbers="true" rotate="false" items-per-page="myLimit" ng-model="status.currentPage" ng-change="paginateNotes()"></ul>
+            </nav>
+            <!--Notes Pagination -->
+    		</div>
+			<div uib-accordion-group class="panel-default" is-open="status.TasksOpen">
+      			<uib-accordion-heading>
+        			<strong>Tasks</strong> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': TasksOpen, 'glyphicon-chevron-right': !TasksOpen}"></i>
+      			</uib-accordion-heading>
+      			This is just some content to illustrate fancy headings.
+    		</div>
+			<div uib-accordion-group class="panel-default" is-open="status.OpportunitiesOpen">
+      			<uib-accordion-heading>
+        			<strong>Opportunities</strong> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.OpportunitiesOpen, 'glyphicon-chevron-right': !status.OpportunitiesOpen}"></i>
+      			</uib-accordion-heading>
+      			This is just some content to illustrate fancy headings.
+    		</div>
+			<div uib-accordion-group class="panel-default" is-open="status.filesOpen">
+      			<uib-accordion-heading>
+        			<strong>Files</strong> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': filesOpen, 'glyphicon-chevron-right': !filesOpen}"></i>
+      			</uib-accordion-heading>
+      			This is just some content to illustrate fancy headings.
+    		</div>
+		</uib-accordion>
+	</div>
+</div>

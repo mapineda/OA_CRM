@@ -1,0 +1,82 @@
+<div class="page-header">
+	<h3>Users</h3>
+</div>
+<ol class="breadcrumb">
+  <li><a href="#/dashboard">Dashboard</a></li>
+  <li class="active">Users</li>
+</ol>
+<div ng-show="error" class="alert alert-danger row">
+	<span>{{error.message}}</span>
+</div>
+<div class="row">
+	<div class="col-sm-8">
+		<form class="form-inline">
+			<div class="form-group">
+				<label for="search">Search: </label>
+				<input id="search" type="text" class="form-control" ng-model="search" ng-change="searchFunction()" placeholder="Search for user..." />
+			</div>
+		</form>
+	</div>
+	<div class="col-sm-2 col-sm-offset-2">
+		<a href="" ng-click="setShowUser()">Create User <span ng-hide="showUser" class="glyphicon glyphicon-arrow-down"></span><span ng-show="showUser" class="glyphicon glyphicon-arrow-up"></span></a>
+	</div>
+</div>
+<div class="table-responsive">
+	<table class="table" ng-show="showUser">
+		<tbody>
+			<tr>
+				<td><input type="text" class="form-control" placeholder="UserId" ng-model="insertUser.userId" /></td>
+				<td><input type="password" class="form-control" placeholder="Password" ng-model="insertUser.pw" /></td>
+				<td><input type="password" class="form-control" placeholder="Confirm password" ng-model="insertUser.pwConfirm" /></td>
+				<td><input type="text" class="form-control" placeholder="First name" ng-model="insertUser.first" /></td>
+				<td><select class="form-control" ng-model="insertUser.isAdmin"><option value="">isAdmin?</option><option value=true>yes</option><option value=false>no</option></select></td>
+			</tr>
+			<tr>
+				<td><input type="text" class="form-control" placeholder="Last name" ng-model="insertUser.last" /></td>
+				<td><input type="email" class="form-control" placeholder="E-mail" ng-model="insertUser.email" /></td>
+				<td><input type="text" class="form-control" placeholder="Title" ng-model="insertUser.title" /></td>
+				<td><input type="text" class="form-control" placeholder="Company" ng-model="insertUser.company" /></td>
+				<td><button type="submit" class="btn btn-primary" ng-click="createUser()">Create User</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="table table-striped" ts-wrapper>
+		<thead>
+			<tr>
+				<th class="tablesort-sortable" ts-criteria="userId" ts-default>User id</th>
+				<th class="tablesort-sortable" ts-criteria="first">First</th>
+				<th class="tablesort-sortable" ts-criteria="last">Last</th>
+				<th class="tablesort-sortable" ts-criteria="admin">Admin?</th>
+				<th class="tablesort-sortable" ts-criteria="email">E-mail</th>
+				<th class="tablesort-sortable" ts-criteria="title">Title</th>
+				<th class="tablesort-sortable" ts-criteria="company">Company</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users | orderBy:'last' | filter:search:strict" ts-repeat>
+				<td>{{user.userId}}</td>
+				<td editable-text="user.first" onaftersave="updateUser(user)">{{user.first}}</td>
+				<td editable-text="user.last" onaftersave="updateUser(user)">{{user.last}}</td>
+				<td>{{user.isAdmin}}</td>
+				<td editable-text="user.email" onaftersave="updateUser(user)">{{user.email}}</td>
+				<td editable-text="user.title" onaftersave="updateUser(user)">{{user.title}}</td>
+				<td editable-text="user.company" onaftersave="updateUser(user)">{{user.company}}</td>
+				<td><button class="btn btn-danger" ng-click="deleteUser(user)"><span class="glyphicon glyphicon-trash"></span></button>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+  	<ul uib-pagination total-items="totalItems" max-size="5" boundary-link-numbers="true" rotate="false" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="getAll()"></ul>
+	<form>
+		<div class="input-group">
+			<label for="itemsPerPage">Users per page: </label>
+	  		<select id="itemsPerPage" ng-model="itemsPerPage" ng-change="getAll2()" ng-options="f for f in itemSelector">
+	  		</select>
+		</div>
+	</form>
+</nav>
+<!-- Pagination -->
+

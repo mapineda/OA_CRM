@@ -1,0 +1,21 @@
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="page-header">
+		<h3>Sign in</h3>
+	</div>
+
+	<div ng-show="error" class="alert alert-danger row">
+		<span>{{error.message}}</span>
+	</div>
+	<form ng-submit="logIn()" class="form col-md-12 center-block" style="margin-top:30px;">
+		<div class="form-group">
+			<input type="text" class="form-control input-lg" placeholder="Username" ng-model="user.userId">
+		</div>
+        <div class="form-group">
+        	<input type="password" class="form-control input-lg" placeholder="Password" ng-model="user.pw">
+        </div>
+        <div class="form-group">
+        	<button class="btn btn-primary btn-lg btn-block">Sign In</button>
+        	<!--<span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need help?</a></span>-->
+        </div>
+    </form>
+</div>
