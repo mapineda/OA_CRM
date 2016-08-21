@@ -23,6 +23,7 @@ var accounts = require('./routes/accounts');
 var contacts = require('./routes/contacts');
 var histories = require('./routes/history');
 
+
 var app = express();
 
 // view engine setup
@@ -43,6 +44,7 @@ app.use('/users', users);
 app.use('/accounts', accounts);
 app.use('/contacts', contacts);
 app.use('/history', histories);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

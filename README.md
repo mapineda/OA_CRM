@@ -30,8 +30,13 @@ Note this program depends on a server.  To use this program you must create your
 ## FAQs
 
 ### What is Open-Austin?
+Open Austin civic hack group and is a Code For America brigade based in Austin, TX.
 
-### What is a CMS?
+### Where can I find out more about Open-Austin?
+Find more info on the website http://www.open-austin.org
+
+### What is a CRM?
+
 
 ### How can I help?
 
