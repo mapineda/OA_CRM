@@ -37,6 +37,10 @@ Find more info on the website http://www.open-austin.org
 
 ### What is a CRM?
 
+```
+Customer relationship management (CRM) is an approach to managing a company's interaction with current and potential future customers. The CRM approach tries to analyse data about customers' history with a company, to improve business relationships with customers, specifically focusing on customer retention, and ultimately to drive sales growth.[1]
+```
+source: wikipedia
 
 ### How can I help?
 
